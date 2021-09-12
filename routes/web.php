@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})
+    ->middleware(['verify.shopify'])
+    ->name('home');
+
+//Route::get('/test', function () {
+//    return 'aaaaaatest';
+//});
+
+Route::get('/test', function () {
+    return View::make(
+        'shopify-app::auth.token',
+        [
+            'shopDomain' => 'macaron-apptest.myshopify.com',
+            'target' => '/',
+        ]
+    );
 });

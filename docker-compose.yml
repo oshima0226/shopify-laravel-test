@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  app:
+    image: hello-world
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0.3
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    volumes:
+      - "mysql-${COMPOSE_PROJECT_NAME}-data:/var/lib/mysql"
+    environment:
+      - "MYSQL_DATABASE=laravel-shopify-boilerplate"
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_USER=webapp"
+      - "MYSQL_PASSWORD=webapp"
+      
+    ports:
+      - "3306:3306"
+volumes:
+  mysql-laravel-shopify-boilerplate-data:
